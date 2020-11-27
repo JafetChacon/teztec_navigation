@@ -28,6 +28,19 @@ int main(){
     for (size_t i = 0; i < num_nodos; i++){
         nodes[i] = new platform(i+65);
     }
-    
+    nodes['B'-65]->set_fatherID('A');
+    nodes['C'-65]->set_fatherID('A');
+    nodes['D'-65]->set_fatherID('B');
+    nodes['E'-65]->set_fatherID('B');
+    nodes['F'-65]->set_fatherID('C');
+    nodes['G'-65]->set_fatherID('C');
+    nodes['H'-65]->set_fatherID('D');
+    nodes['I'-65]->set_fatherID('D');
+    nodes['J'-65]->set_fatherID('G');
+
+    for (size_t i = 0; i < num_nodos; i++){
+        cout<<"Nodo "<<nodes[i]->get_ID()<<" - Padre: "<<nodes[i]->get_fatherID()<<endl;
+    }
+
     cout<<"Compila"<<endl;
 }
