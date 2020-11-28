@@ -9,7 +9,7 @@ class platform{
         char ID;
         char fatherID;
         int Nchild;
-        int *childID;
+        char *childID;
     public:
         platform(){
 
@@ -26,6 +26,7 @@ class platform{
         char get_ID();
         void set_fatherID(char);
         char get_fatherID();
+        void set_childrenID(int argc, char *argv[]);
 
         ~platform(){}
 };

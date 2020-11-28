@@ -11,3 +11,7 @@ void platform::set_fatherID(char _fatherID){
 char platform::get_fatherID(){
     return fatherID;
 }
+void platform::set_childrenID(int argc, char *argv[]){
+    Nchild = argc - 1;
+    childID = new char[Nchild];
+}
