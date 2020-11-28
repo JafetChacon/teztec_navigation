@@ -37,8 +37,8 @@ int main(){
 
     char *childList;
     for (size_t i = 0; i < num_nodos; i++){
-        cout<<"Node "<<char(i+65)<<" have "<<nodes[i]->get_childrenNum()<< " children.";
-        if(nodes[i]->get_childrenNum()>0) cout<<" There are: ";
+        cout<<'\t'<<char(i+65)<<" [parent: "<<nodes[i]->get_fatherID()<<"]. ("<<nodes[i]->get_childrenNum()<< " children)";
+        if(nodes[i]->get_childrenNum()>0) cout<<"\tThere are: ";
         childList = nodes[i]->get_childrenID();
         for (size_t j = 0; j < nodes[i]->get_childrenNum(); j++){
             cout<<*(childList + j)<<" ";
@@ -49,14 +49,9 @@ int main(){
     
     /*#################### Creación de los nodos ####################*/
 
-    /*############### Impresión  de los nodos y sus padres ##########*/
-    //for (size_t i = 0; i < num_nodos; i++){
-    //    cout<<"Nodo "<<nodes[i]->get_ID()<<" - Padre: "<<nodes[i]->get_fatherID()<<endl;
-    //}
-    /*############### Impresión  de los nodos y sus padres ##########*/
-
+    
     cout<<endl;
-    startNode = 'B';
+    startNode = 'F';
     goalNode = 'J';
     get_path(nodes[0],startNode,goalNode);
     cout<<"Camino para llegar de <<"<<startNode<<">> a <<"<<goalNode<<">>:"<<endl;
