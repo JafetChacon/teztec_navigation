@@ -10,6 +10,7 @@ class platform{
         char fatherID;
         int Nchild;
         char *childID;
+        
     public:
         platform(){
 
@@ -26,7 +27,7 @@ class platform{
         char get_ID();
         void set_fatherID(char);
         char get_fatherID();
-        void set_childrenID(char argv[]);
+        void set_childrenID(string);
         int get_childrenNum();
         char * get_childrenID();
 

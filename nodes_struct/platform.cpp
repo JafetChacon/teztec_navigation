@@ -1,4 +1,6 @@
 #include "platform.h"
+#include <cstring>
+
 void platform::set_ID(char _ID){
     ID = _ID;
 }
@@ -11,17 +13,10 @@ void platform::set_fatherID(char _fatherID){
 char platform::get_fatherID(){
     return fatherID;
 }
-void platform::set_childrenID(char argv[]){
-    int i=0;
-    Nchild=0;
-    while (argv[i]!='\0'){
-        Nchild++;
-        i++;
-    }
+void platform::set_childrenID(string argv){
+    Nchild = argv.length();
     childID = new char[Nchild];
-    for (i = 0; i < Nchild; i++){
-        childID[i]=argv[i];
-    }
+    strcpy(childID, argv.c_str());
 }
 int platform::get_childrenNum(){
     return Nchild;

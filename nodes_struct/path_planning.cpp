@@ -29,13 +29,23 @@ int main(){
     nodes['K'-65]->set_fatherID('G');
 
     nodes['A'-65]->set_childrenID("BC");
-    cout<<"Node A have "<<nodes['A'-65]->get_childrenNum()<<" children."<<endl;
-    cout<<"The node A children are: "<<endl;
-    char *childList = nodes['A'-65]->get_childrenID();
-    for (size_t i = 0; i < nodes['A'-65]->get_childrenNum(); i++){
-        cout<<*(childList + i)<<" ";
+    nodes['B'-65]->set_childrenID("DE");
+    nodes['C'-65]->set_childrenID("FG");
+    nodes['D'-65]->set_childrenID("HI");
+    nodes['E'-65]->set_childrenID("J");
+    nodes['G'-65]->set_childrenID("K");
+
+    char *childList;
+    for (size_t i = 0; i < num_nodos; i++){
+        cout<<"Node "<<char(i+65)<<" have "<<nodes[i]->get_childrenNum()<< " children.";
+        if(nodes[i]->get_childrenNum()>0) cout<<" There are: ";
+        childList = nodes[i]->get_childrenID();
+        for (size_t j = 0; j < nodes[i]->get_childrenNum(); j++){
+            cout<<*(childList + j)<<" ";
+        }
+        cout<<endl;
     }
-    cout<<endl;
+    
     
     /*#################### Creación de los nodos ####################*/
 
@@ -46,8 +56,8 @@ int main(){
     /*############### Impresión  de los nodos y sus padres ##########*/
 
     cout<<endl;
-    startNode = 'H';
-    goalNode = 'F';
+    startNode = 'B';
+    goalNode = 'J';
     get_path(nodes[0],startNode,goalNode);
     cout<<"Camino para llegar de <<"<<startNode<<">> a <<"<<goalNode<<">>:"<<endl;
     cout<<startNode;
