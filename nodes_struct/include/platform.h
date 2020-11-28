@@ -6,7 +6,7 @@ using namespace std;
 
 class platform{
     private:
-        //float fatherPose[3];
+        float fatherPose[3];
         char ID;
         char fatherID;
         int Nchild;

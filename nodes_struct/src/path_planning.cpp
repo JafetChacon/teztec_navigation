@@ -8,6 +8,7 @@ using namespace std;
 void get_ancestorList(platform *,char);
 void get_path(platform *,char,char);
 vector<char> path_aux1, path_aux2, path;
+int memberGlobalsize;
 
 int main(){
     char startNode,goalNode; 
@@ -17,23 +18,17 @@ int main(){
     for (size_t i = 0; i < num_nodos; i++){
         nodes[i] = new platform(i+65);
     }
-    nodes['B'-65]->set_fatherID('A');
-    nodes['C'-65]->set_fatherID('A');
-    nodes['D'-65]->set_fatherID('B');
-    nodes['E'-65]->set_fatherID('B');
+                                        nodes['A'-65]->set_childrenID("BC");
+    nodes['B'-65]->set_fatherID('A');   nodes['B'-65]->set_childrenID("DE");
+    nodes['C'-65]->set_fatherID('A');   nodes['C'-65]->set_childrenID("FG");
+    nodes['D'-65]->set_fatherID('B');   nodes['D'-65]->set_childrenID("HI");
+    nodes['E'-65]->set_fatherID('B');   nodes['E'-65]->set_childrenID("J");
     nodes['F'-65]->set_fatherID('C');
-    nodes['G'-65]->set_fatherID('C');
+    nodes['G'-65]->set_fatherID('C');   nodes['G'-65]->set_childrenID("K");
     nodes['H'-65]->set_fatherID('D');
     nodes['I'-65]->set_fatherID('D');
     nodes['J'-65]->set_fatherID('E');
     nodes['K'-65]->set_fatherID('G');
-
-    nodes['A'-65]->set_childrenID("BC");
-    nodes['B'-65]->set_childrenID("DE");
-    nodes['C'-65]->set_childrenID("FG");
-    nodes['D'-65]->set_childrenID("HI");
-    nodes['E'-65]->set_childrenID("J");
-    nodes['G'-65]->set_childrenID("K");
 
     char *childList;
     for (size_t i = 0; i < num_nodos; i++){
@@ -45,12 +40,10 @@ int main(){
         }
         cout<<endl;
     }
-    
-    
     /*#################### Creación de los nodos ####################*/
-
+    memberGlobalsize = sizeof(nodes[0]);
+    cout<<"tamaño de memoria por nodo: "<<memberGlobalsize<<endl;
     
-    cout<<endl;
     startNode = 'F';
     goalNode = 'J';
     get_path(nodes[0],startNode,goalNode);
@@ -63,12 +56,14 @@ int main(){
 }
 
 void get_ancestorList(platform *nodes,char nodeID){
-    nodeID = 2*(nodeID-65);
+    nodeID = (sizeof(nodes[0])/memberGlobalsize)*(nodeID-65);
     char fatherID = nodes[nodeID].get_fatherID();
+    cout<<fatherID<<" - ";
     if (fatherID != 0){
         path_aux1.push_back(fatherID);
         get_ancestorList(*&nodes,fatherID);
     }
+    cout<<endl;
 }
 
 void get_path(platform *nodes,char startID, char goalID){
