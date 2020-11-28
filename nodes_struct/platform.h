@@ -6,19 +6,14 @@ using namespace std;
 
 class platform{
     private:
+        //float fatherPose[3];
         char ID;
         char fatherID;
         int Nchild;
         char *childID;
-        
     public:
         platform(){
 
-        }
-        platform(char _ID, int _Nchild, char _fatherID){
-            this->ID = _ID;
-            this->Nchild = _Nchild;
-            this->fatherID = _fatherID;
         }
         platform(char _ID){
             this->ID = _ID;
