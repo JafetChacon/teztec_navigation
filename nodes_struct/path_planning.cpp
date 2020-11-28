@@ -60,7 +60,6 @@ int main(){
     goalNode = 'J';
     get_path(nodes[0],startNode,goalNode);
     cout<<"Camino para llegar de <<"<<startNode<<">> a <<"<<goalNode<<">>:"<<endl;
-    cout<<startNode;
     for (size_t i = 0; i < path.size(); i++){
         cout << " -> " << path[i];
     }
@@ -79,11 +78,13 @@ void get_ancestorList(platform *nodes,char nodeID){
 
 void get_path(platform *nodes,char startID, char goalID){
     char ancestor;
+    path_aux2.push_back(startID);
     get_ancestorList(*&nodes,startID);              //Se obtienen todos los ancestros del nodo inicial
     for (size_t i = 0; i < path_aux1.size(); i++){
         path_aux2.push_back(path_aux1[i]);
     }
     path_aux1.clear();
+    path_aux2.push_back(goalID);
     get_ancestorList(*&nodes,goalID);               //Se obtienen todos los ancestros del nodo meta
     //path_aux1 contiene los ancestros del nodo de destino
     //path_aux2 contiene los ancestros del nodo de origen
