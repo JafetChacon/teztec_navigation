@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include "platform.h"
+#include <vector>
 
 using namespace std;
 /*
@@ -19,11 +20,11 @@ Nodo create_node(char _ID, string _description, char _fatherID, int _Nchild){
     nodo.description=_description;
 }
 */
-void createNodes(platform *, int);
-void print_fatherIDlist(platform *,char){
+void get_ancesterList(platform *,char);
+vector<char> path;
 
 int main(){
-    //Creación de los nodos
+    /******************* Creación de los nodos *******************/
     int num_nodos = 10;
     platform *nodes[num_nodos];
     for (size_t i = 0; i < num_nodos; i++){
@@ -38,23 +39,29 @@ int main(){
     nodes['H'-65]->set_fatherID('D');
     nodes['I'-65]->set_fatherID('D');
     nodes['J'-65]->set_fatherID('G');
+    /******************* Creación de los nodos *******************/
 
+    /************ Impresión  de los nodos y sus padres ***********/
     for (size_t i = 0; i < num_nodos; i++){
         cout<<"Nodo "<<nodes[i]->get_ID()<<" - Padre: "<<nodes[i]->get_fatherID()<<endl;
     }
+    /************ Impresión  de los nodos y sus padres ***********/
+
     cout<<endl;
-    print_fatherIDlist(nodes[0],'H');
-    cout<<"Compila"<<endl;
+    //print_fatherIDlist(nodes[0],'H');
+    get_ancesterList(nodes[0],'I');
+    for (size_t i = 0; i < path.size(); i++){
+        cout << " - " << path[i];
+    }
+    cout<<"\nCompila"<<endl;
     return 0;
 }
 
-void print_fatherIDlist(platform *nodes,char nodeID){
+void get_ancesterList(platform *nodes,char nodeID){
     nodeID = 2*(nodeID-65);
     char fatherID = nodes[nodeID].get_fatherID();
     if (fatherID != 0){
-        cout << fatherID << " - ";
-        print_fatherIDlist(*&nodes,fatherID);
-    }else{
-        cout<<"."<<endl;
+        path.push_back(fatherID);
+        get_ancesterList(*&nodes,fatherID);
     }
 }
