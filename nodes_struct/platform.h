@@ -26,7 +26,9 @@ class platform{
         char get_ID();
         void set_fatherID(char);
         char get_fatherID();
-        void set_childrenID(int argc, char *argv[]);
+        void set_childrenID(char argv[]);
+        int get_childrenNum();
+        char * get_childrenID();
 
         ~platform(){}
 };

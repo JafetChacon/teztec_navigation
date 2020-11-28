@@ -27,12 +27,22 @@ int main(){
     nodes['I'-65]->set_fatherID('D');
     nodes['J'-65]->set_fatherID('E');
     nodes['K'-65]->set_fatherID('G');
+
+    nodes['A'-65]->set_childrenID("BC");
+    cout<<"Node A have "<<nodes['A'-65]->get_childrenNum()<<" children."<<endl;
+    cout<<"The node A children are: "<<endl;
+    char *childList = nodes['A'-65]->get_childrenID();
+    for (size_t i = 0; i < nodes['A'-65]->get_childrenNum(); i++){
+        cout<<*(childList + i)<<" ";
+    }
+    cout<<endl;
+    
     /*#################### Creación de los nodos ####################*/
 
     /*############### Impresión  de los nodos y sus padres ##########*/
-    for (size_t i = 0; i < num_nodos; i++){
-        cout<<"Nodo "<<nodes[i]->get_ID()<<" - Padre: "<<nodes[i]->get_fatherID()<<endl;
-    }
+    //for (size_t i = 0; i < num_nodos; i++){
+    //    cout<<"Nodo "<<nodes[i]->get_ID()<<" - Padre: "<<nodes[i]->get_fatherID()<<endl;
+    //}
     /*############### Impresión  de los nodos y sus padres ##########*/
 
     cout<<endl;
