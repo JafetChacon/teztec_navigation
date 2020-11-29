@@ -2,31 +2,39 @@
 #define PLATFORM_H
 
 #include <iostream>
+#include <map>
+#include <vector>
+#include "../include/posesID.h"
 using namespace std;
 
 class platform{
     private:
-        float fatherPose[3];
+        posesID parentPose;
         char ID;
-        char fatherID;
+        char parentID;
         int Nchild;
-        char *childID;
-        float *childPose;
+        char *childIDpointer;
+        vector<char> childID;
+        map<char,posesID> outPose;
     public:
         platform(){
             Nchild=0;
+            parentPose = {0,0,0};
         }
         platform(char _ID){
             this->ID = _ID;
         }
         void set_ID(char);
         char get_ID();
-        void set_fatherID(char);
-        char get_fatherID();
+        void set_parentID(char);
+        char get_parentID();
         void set_childrenID(string);
         int get_childrenNum();
         char * get_childrenID();
-
+        void set_childPose(char,posesID);
+        posesID get_childPose(char);
+        void set_parentPose(posesID);
+        posesID get_parentPose();
         ~platform(){}
 };
 
