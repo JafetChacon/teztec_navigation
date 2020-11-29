@@ -11,6 +11,7 @@ class platform{
         char fatherID;
         int Nchild;
         char *childID;
+        float *childPose;
     public:
         platform(){
             Nchild=0;

@@ -8,9 +8,9 @@ using namespace std;
 void get_ancestorList(platform [],char);
 void get_path(platform [],char,char);
 vector<char> path_aux1, path_aux2, path;
-int memberGlobalsize;
 
 int main(){
+    char *childList;
     char startNode,goalNode; 
     /*#################### Creación de los nodos ####################*/
     int num_nodos = 11;
@@ -30,7 +30,6 @@ int main(){
     nodes['J'-65].set_fatherID('E');
     nodes['K'-65].set_fatherID('G');
 
-    char *childList;
     for (size_t i = 0; i < num_nodos; i++){
         cout<<'\t'<<char(i+65)<<" [parent: "<<nodes[i].get_fatherID()<<"]. ("<<nodes[i].get_childrenNum()<< " children)";
         if(nodes[i].get_childrenNum()>0) cout<<"\tThere are: ";
@@ -41,16 +40,12 @@ int main(){
         cout<<endl;
     }
     /*#################### Creación de los nodos ####################*/
-    memberGlobalsize = sizeof(nodes[0]);
-    cout<<"tamaño de memoria por nodo: "<<memberGlobalsize<<endl;
     
-    startNode = 'H';
-    goalNode = 'J';
+    startNode = 'C';
+    goalNode = 'K';
     get_path(nodes,startNode,goalNode);
     cout<<"Camino para llegar de <<"<<startNode<<">> a <<"<<goalNode<<">>:"<<endl;
-    for (size_t i = 0; i < path.size(); i++){
-        cout << " -> " << path[i];
-    }
+    for (size_t i = 0; i < path.size(); i++) cout << " -> " << path[i];
     cout<<endl;
     return 0;
 }
@@ -68,9 +63,7 @@ void get_path(platform nodes[],char startID, char goalID){
     char ancestor;
     path_aux2.push_back(startID);
     get_ancestorList(nodes,startID);              //Se obtienen todos los ancestros del nodo inicial
-    for (size_t i = 0; i < path_aux1.size(); i++){
-        path_aux2.push_back(path_aux1[i]);
-    }
+    for (size_t i = 0; i < path_aux1.size(); i++) path_aux2.push_back(path_aux1[i]);
     path_aux1.clear();
     path_aux2.push_back(goalID);
     get_ancestorList(nodes,goalID);               //Se obtienen todos los ancestros del nodo meta
@@ -81,9 +74,7 @@ void get_path(platform nodes[],char startID, char goalID){
     path.clear();
     bool found = false;
     for (size_t i = 0; i < path_aux2.size(); i++){
-        if(!found){
-            path.push_back(path_aux2[i]);
-        }
+        if(!found) path.push_back(path_aux2[i]);    //Ingreso de los primeros nodos al path
         for(size_t j = 0; j < path_aux1.size(); j++){
             if ((path_aux1[j] == path_aux2[i]) && !found){
                 ancestor = path_aux2[i];
@@ -97,11 +88,7 @@ void get_path(platform nodes[],char startID, char goalID){
     path_aux1.push_back(goalID);                    // Agregar el nodo meta a la lista
     found = false;
     for(size_t i = 0; i < path_aux1.size() ; i++){  // Iteración y seleccion de los nodos post - ancestro común
-        if(found){
-            path.push_back(path_aux1[i]);
-        }
-        if(path_aux1[i]==ancestor){
-            found = true;
-        }
+        if(found) path.push_back(path_aux1[i]);
+        if(path_aux1[i]==ancestor) found = true;
     }   
 }
