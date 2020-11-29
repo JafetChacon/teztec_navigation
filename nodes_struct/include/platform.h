@@ -13,7 +13,7 @@ class platform{
         char *childID;
     public:
         platform(){
-
+            Nchild=0;
         }
         platform(char _ID){
             this->ID = _ID;
