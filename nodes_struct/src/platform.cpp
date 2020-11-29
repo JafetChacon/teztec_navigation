@@ -1,4 +1,4 @@
-#include "platform.h"
+#include "../include/platform.h"
 #include <cstring>
 
 void platform::set_ID(char _ID){

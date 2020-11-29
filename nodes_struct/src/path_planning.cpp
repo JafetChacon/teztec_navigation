@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
-#include "platform.h"
+#include "../include/platform.h"
+//#include "platform.h"
 #include <vector>
 #include <algorithm>
 
