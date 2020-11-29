@@ -8,9 +8,9 @@ using namespace std;
 void get_ancestorList(platform [],char);
 void get_path(platform [],char,char);
 vector<char> path_aux1, path_aux2, path;
-int memberGlobalsize;
 
 int main(){
+    char *childList;
     char startNode,goalNode; 
     /*#################### Creación de los nodos ####################*/
     int num_nodos = 11;
@@ -30,7 +30,6 @@ int main(){
     nodes['J'-65].set_fatherID('E');
     nodes['K'-65].set_fatherID('G');
 
-    char *childList;
     for (size_t i = 0; i < num_nodos; i++){
         cout<<'\t'<<char(i+65)<<" [parent: "<<nodes[i].get_fatherID()<<"]. ("<<nodes[i].get_childrenNum()<< " children)";
         if(nodes[i].get_childrenNum()>0) cout<<"\tThere are: ";
@@ -41,8 +40,6 @@ int main(){
         cout<<endl;
     }
     /*#################### Creación de los nodos ####################*/
-    memberGlobalsize = sizeof(nodes[0]);
-    cout<<"tamaño de memoria por nodo: "<<memberGlobalsize<<endl;
     
     startNode = 'H';
     goalNode = 'J';
