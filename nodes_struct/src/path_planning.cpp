@@ -41,7 +41,6 @@ int main(){
         cout<<endl;
     }
     /*#################### Creación de los nodos ####################*/
-
     startNode = 'H';
     goalNode = 'K';
     get_path(nodes,startNode,goalNode);
