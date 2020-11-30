@@ -13,7 +13,7 @@ char platform::get_ID(){
 }
 void platform::set_parentID(char _parentID){
     parentID = _parentID;
-    //outPose.insert(pair<char,posesID>(_parentID,{0,0,0}));
+    outPose.insert(pair<char,posesID>(_parentID,{0.0,0.0,10.0}));
 }
 char platform::get_parentID(){
     return parentID;
@@ -26,6 +26,7 @@ void platform::set_childrenID(string argv){
         childID.push_back(childIDpointer[i]);
         outPose.insert(pair<char,posesID>(childIDpointer[i],{0.0,0.0,0.0}));
     }
+    
 }
 int platform::get_childrenNum(){
     return Nchild;
@@ -33,22 +34,23 @@ int platform::get_childrenNum(){
 char * platform::get_childrenID(){
     return childIDpointer;
 }
-void platform::set_childPose(char _childID,posesID pose){
+void platform::set_outPose(char _childID,posesID pose){
     outPose[_childID] = pose;
 }
-posesID platform::get_childPose(char _ID){
+void platform::set_outPose(posesID pose){
+    outPose[parentID] = pose;
+}
+posesID platform::get_outPose(char _ID){
     if (count(childID.begin(),childID.end(),_ID)){
-        //cout<<"es su hijo we!"<<endl;
         return outPose[_ID];
+    }else if (_ID==parentID){
+        //return parentPose;
+        return outPose[parentID];
     }else{
-        //cout<<"sepa la madre quien sea we!"<<endl;
-        return {0,0,0};
+        return {0.0,0.0,0.0};
     }
 }
-void platform::set_parentPose(posesID pose){
-    //outPose[parentID] = pose;
-    parentPose = pose;
-}
 posesID platform::get_parentPose(){
-    return parentPose;
+    return outPose[parentID];
+    //return parentPose;
 }

@@ -31,9 +31,9 @@ class platform{
         void set_childrenID(string);
         int get_childrenNum();
         char * get_childrenID();
-        void set_childPose(char,posesID);
-        posesID get_childPose(char);
-        void set_parentPose(posesID);
+        void set_outPose(char,posesID);
+        void set_outPose(posesID);
+        posesID get_outPose(char);
         posesID get_parentPose();
         ~platform(){}
 };
