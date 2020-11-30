@@ -18,9 +18,7 @@ int main(){
     char *childList;
     char startNode,goalNode; 
     /*#################### Creación de los nodos ####################*/
-    for (size_t i = 0; i < num_nodos; i++){
-        nodes[i].set_ID(i+65);
-    }
+    for (size_t i = 0; i < num_nodos; i++){nodes[i].set_ID(i+65);}
                                                                                     nodes['A'-65].set_childrenID("BC"); nodes['A'-65].set_outPose('B',{0.0,1.0,0.0}); nodes['A'-65].set_outPose('C',{0.0,2.0,0.0});
     nodes['B'-65].set_parentID('A');    nodes['B'-65].set_outPose({0.0,3.0,0.0});   nodes['B'-65].set_childrenID("DE"); nodes['B'-65].set_outPose('D',{0.0,5.0,0.0}); nodes['B'-65].set_outPose('E',{0.0,6.0,0.0});
     nodes['C'-65].set_parentID('A');    nodes['C'-65].set_outPose({0.0,4.0,0.0});   nodes['C'-65].set_childrenID("FG"); nodes['C'-65].set_outPose('F',{0.0,7.0,0.0}); nodes['C'-65].set_outPose('G',{0.0,8.0,0.0});
@@ -52,20 +50,14 @@ int main(){
     cout<<endl;
 
     /*########################## Trazado de coordenadas ##########################*/
-    
     cout<<"La serie de coordenadas a seguir son:"<<endl;
     get_pathCoordenades(nodes);
-    
-    /* Show path coordenades*/
-    for (size_t i = 0; i < pathCoordenades.size(); i++){
+    for (size_t i = 0; i < pathCoordenades.size(); i++){    /* Show path coordenades*/
         cout<<'(';
-        for (size_t j = 0; j < 3; j++){
-            cout<<pathCoordenades[i].pose[j]; if(j<2) cout<<',';
-        }
+        for (size_t j = 0; j < 3; j++){cout<<pathCoordenades[i].pose[j]; if(j<2) cout<<',';}
         cout<<')'; if(i<pathCoordenades.size()-1) cout<<" -> ";
     }
     cout<<endl;
-    
     return 0;
 }
 
@@ -116,10 +108,6 @@ void get_pathCoordenades(platform node[]){
     posesID aux;
     for (size_t j = 1; j < path.size(); j++){
         pathCoordenades.push_back(node[path[j-1]-65].get_outPose(path[j]));
-<<<<<<< HEAD
         pathCoordenades.push_back(node[path[j]-65].get_outPose(path[j-1]));
-=======
-        pathCoordenades.push_back(aux = node[path[j]-65].get_outPose(path[j-1]));
->>>>>>> 69ade2b18e47bd6f67e0d8dd7892812e50b4002a
     }
 }
