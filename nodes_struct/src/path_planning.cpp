@@ -8,14 +8,16 @@
 using namespace std;
 void get_ancestorList(platform [],char);
 void get_path(platform [],char,char);
+void get_pathCoordenades(platform []);
 vector<char> path_aux1, path_aux2, path;
+vector<posesID> pathCoordenades;
 
 int main(){
+    int num_nodos = 11;
+    platform nodes[num_nodos];
     char *childList;
     char startNode,goalNode; 
     /*#################### Creación de los nodos ####################*/
-    int num_nodos = 11;
-    platform nodes[num_nodos];
     for (size_t i = 0; i < num_nodos; i++){
         nodes[i].set_ID(i+65);
     }
@@ -30,7 +32,7 @@ int main(){
     nodes['I'-65].set_parentID('D');    nodes['I'-65].set_outPose({1.0,8.0,0.0});
     nodes['J'-65].set_parentID('E');    nodes['J'-65].set_outPose({1.0,9.0,0.0});
     nodes['K'-65].set_parentID('G');    nodes['K'-65].set_outPose({2.0,0.0,0.0});
-
+    /* Use for debbuging only
     for (size_t i = 0; i < num_nodos; i++){
         cout<<'\t'<<char(i+65)<<" [parent: "<<nodes[i].get_parentID()<<"]. ("<<nodes[i].get_childrenNum()<< " children)";
         if(nodes[i].get_childrenNum()>0) cout<<"\tThere are: ";
@@ -40,33 +42,29 @@ int main(){
         }
         cout<<endl;
     }
+    */
     /*#################### Creación de los nodos ####################*/
-    startNode = 'K';
-    goalNode = 'H';
+    startNode = 'F';
+    goalNode = 'K';
     get_path(nodes,startNode,goalNode);
-    cout<<"Camino para llegar de <<"<<startNode<<">> a <<"<<goalNode<<">>:"<<endl;
+    cout<<"\nCamino para llegar de <<"<<startNode<<">> a <<"<<goalNode<<">>:"<<endl;
     for (size_t i = 0; i < path.size(); i++) cout << " -> " << path[i];
     cout<<endl;
 
     /*########################## Trazado de coordenadas ##########################*/
     
-    posesID aux1,aux2;
     cout<<"La serie de coordenadas a seguir son:"<<endl;
-    for (size_t j = 1; j < path.size(); j++){
-        aux1 = nodes[path[j-1]-65].get_outPose(path[j]);
-        cout<<'(';
-        for (size_t i = 0; i < 3; i++){
-            cout<<aux1.pose[i]; if(i<2) cout<<',';
-        }
-        cout<<')'<<" -> ";
-        aux2 = nodes[path[j]-65].get_outPose(path[j-1]);
-        cout<<'(';
-        for (size_t i = 0; i < 3; i++){
-            cout<<aux2.pose[i]; if(i<2) cout<<',';
-        }
-        cout<<')'<<endl;
-    }
+    get_pathCoordenades(nodes);
     
+    /* Show path coordenades*/
+    for (size_t i = 0; i < pathCoordenades.size(); i++){
+        cout<<'(';
+        for (size_t j = 0; j < 3; j++){
+            cout<<pathCoordenades[i].pose[j]; if(j<2) cout<<',';
+        }
+        cout<<')'; if(i<pathCoordenades.size()-1) cout<<" -> ";
+    }
+    cout<<endl;
     
     return 0;
 }
@@ -99,7 +97,7 @@ void get_path(platform nodes[],char startID, char goalID){
         for(size_t j = 0; j < path_aux1.size(); j++){
             if ((path_aux1[j] == path_aux2[i]) && !found){
                 ancestor = path_aux2[i];
-                cout << "\nAncestro común más cercano: "<<ancestor<<endl;
+                //cout << "\nAncestro común más cercano: "<<ancestor<<endl;
                 found = true;
             }
         }
@@ -112,4 +110,12 @@ void get_path(platform nodes[],char startID, char goalID){
         if(found) path.push_back(path_aux1[i]);
         if(path_aux1[i]==ancestor) found = true;
     }   
+}
+
+void get_pathCoordenades(platform node[]){
+    posesID aux;
+    for (size_t j = 1; j < path.size(); j++){
+        pathCoordenades.push_back(node[path[j-1]-65].get_outPose(path[j]));
+        pathCoordenades.push_back(node[path[j]-65].get_outPose(path[j-1]));
+    }
 }
