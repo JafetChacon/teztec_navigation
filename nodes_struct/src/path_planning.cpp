@@ -116,6 +116,10 @@ void get_pathCoordenades(platform node[]){
     posesID aux;
     for (size_t j = 1; j < path.size(); j++){
         pathCoordenades.push_back(node[path[j-1]-65].get_outPose(path[j]));
+<<<<<<< HEAD
         pathCoordenades.push_back(node[path[j]-65].get_outPose(path[j-1]));
+=======
+        pathCoordenades.push_back(aux = node[path[j]-65].get_outPose(path[j-1]));
+>>>>>>> 69ade2b18e47bd6f67e0d8dd7892812e50b4002a
     }
 }
