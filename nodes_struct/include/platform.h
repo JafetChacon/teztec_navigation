@@ -9,7 +9,6 @@ using namespace std;
 
 class platform{
     private:
-        posesID parentPose;
         char ID;
         char parentID;
         int Nchild;
@@ -19,7 +18,6 @@ class platform{
     public:
         platform(){
             Nchild=0;
-            parentPose = {0,0,0};
         }
         platform(char _ID){
             this->ID = _ID;

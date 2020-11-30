@@ -13,7 +13,7 @@ char platform::get_ID(){
 }
 void platform::set_parentID(char _parentID){
     parentID = _parentID;
-    outPose.insert(pair<char,posesID>(_parentID,{0.0,0.0,10.0}));
+    outPose.insert(pair<char,posesID>(_parentID,{0.0,0.0,0.0}));
 }
 char platform::get_parentID(){
     return parentID;
@@ -26,7 +26,6 @@ void platform::set_childrenID(string argv){
         childID.push_back(childIDpointer[i]);
         outPose.insert(pair<char,posesID>(childIDpointer[i],{0.0,0.0,0.0}));
     }
-    
 }
 int platform::get_childrenNum(){
     return Nchild;
@@ -41,16 +40,11 @@ void platform::set_outPose(posesID pose){
     outPose[parentID] = pose;
 }
 posesID platform::get_outPose(char _ID){
-    if (count(childID.begin(),childID.end(),_ID)){
+    if (count(childID.begin(),childID.end(),_ID) || _ID==parentID){
         return outPose[_ID];
-    }else if (_ID==parentID){
-        //return parentPose;
-        return outPose[parentID];
-    }else{
-        return {0.0,0.0,0.0};
     }
+    else return {0.0,0.0,0.0};
 }
 posesID platform::get_parentPose(){
     return outPose[parentID];
-    //return parentPose;
 }
