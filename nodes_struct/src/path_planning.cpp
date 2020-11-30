@@ -13,26 +13,21 @@ vector<char> path_aux1, path_aux2, path;
 vector<posesID> pathCoordenades;
 
 int main(){
-    int num_nodos = 11;
+    int num_nodos = 6;
     platform nodes[num_nodos];
     char *childList;
     char startNode,goalNode;
-    startNode = 'F';
-    goalNode = 'K';
+    startNode = 'D';
+    goalNode = 'F';
     /*#################### Creación de los nodos ####################*/
     for (size_t i = 0; i < num_nodos; i++){nodes[i].set_ID(i+65);}
-                                                                                    nodes['A'-65].set_childrenID("BC"); nodes['A'-65].set_outPose('B',{0.0,1.0,0.0}); nodes['A'-65].set_outPose('C',{0.0,2.0,0.0});
-    nodes['B'-65].set_parentID('A');    nodes['B'-65].set_outPose({0.0,3.0,0.0});   nodes['B'-65].set_childrenID("DE"); nodes['B'-65].set_outPose('D',{0.0,5.0,0.0}); nodes['B'-65].set_outPose('E',{0.0,6.0,0.0});
-    nodes['C'-65].set_parentID('A');    nodes['C'-65].set_outPose({0.0,4.0,0.0});   nodes['C'-65].set_childrenID("FG"); nodes['C'-65].set_outPose('F',{0.0,7.0,0.0}); nodes['C'-65].set_outPose('G',{0.0,8.0,0.0});
-    nodes['D'-65].set_parentID('B');    nodes['D'-65].set_outPose({0.0,9.0,0.0});   nodes['D'-65].set_childrenID("HI"); nodes['D'-65].set_outPose('H',{1.0,3.0,0.0}); nodes['D'-65].set_outPose('I',{1.0,4.0,0.0});
-    nodes['E'-65].set_parentID('B');    nodes['E'-65].set_outPose({1.0,0.0,0.0});   nodes['E'-65].set_childrenID("J");  nodes['E'-65].set_outPose('J',{1.0,5.0,0.0});
-    nodes['F'-65].set_parentID('C');    nodes['F'-65].set_outPose({1.0,1.0,0.0});
-    nodes['G'-65].set_parentID('C');    nodes['G'-65].set_outPose({1.0,2.0,0.0});   nodes['G'-65].set_childrenID("K");  nodes['G'-65].set_outPose('K',{1.0,6.0,0.0});
-    nodes['H'-65].set_parentID('D');    nodes['H'-65].set_outPose({1.0,7.0,0.0});
-    nodes['I'-65].set_parentID('D');    nodes['I'-65].set_outPose({1.0,8.0,0.0});
-    nodes['J'-65].set_parentID('E');    nodes['J'-65].set_outPose({1.0,9.0,0.0});
-    nodes['K'-65].set_parentID('G');    nodes['K'-65].set_outPose({2.0,0.0,0.0});
-    /* Use for debbuging only
+                                                                                    nodes['A'-65].set_childrenID("BC"); nodes['A'-65].set_outPose('B',{0.0,0.0,1.0}); nodes['A'-65].set_outPose('C',{0.0,0.0,2.0});
+    nodes['B'-65].set_parentID('A');    nodes['B'-65].set_outPose({0.0,0.0,3.0});   nodes['B'-65].set_childrenID("D");  nodes['B'-65].set_outPose('D',{0.0,0.0,5.0});
+    nodes['C'-65].set_parentID('A');    nodes['C'-65].set_outPose({0.0,0.0,4.0});   nodes['C'-65].set_childrenID("EF"); nodes['C'-65].set_outPose('E',{0.0,0.0,6.0}); nodes['C'-65].set_outPose('F',{0.0,0.0,7.0});
+    nodes['D'-65].set_parentID('B');    nodes['D'-65].set_outPose({0.0,0.0,8.0});
+    nodes['E'-65].set_parentID('C');    nodes['E'-65].set_outPose({0.0,0.0,9.0});
+    nodes['F'-65].set_parentID('C');    nodes['F'-65].set_outPose({0.0,1.0,0.0});
+    
     for (size_t i = 0; i < num_nodos; i++){
         cout<<'\t'<<char(i+65)<<" [parent: "<<nodes[i].get_parentID()<<"]. ("<<nodes[i].get_childrenNum()<< " children)";
         if(nodes[i].get_childrenNum()>0) cout<<"\tThere are: ";
@@ -40,8 +35,8 @@ int main(){
         for (size_t j = 0; j < nodes[i].get_childrenNum(); j++){cout<<*(childList + j)<<" ";}
         cout<<endl;
     }
-    */
-    /*#################### Creación de los nodos ####################*/
+    
+    /*########################### Creación de los nodos ###########################*/
     
     get_path(nodes,startNode,goalNode);
     cout<<"\nCamino para llegar de <<"<<startNode<<">> a <<"<<goalNode<<">>:"<<endl;
