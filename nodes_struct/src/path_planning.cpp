@@ -98,7 +98,6 @@ void get_path(platform nodes[],char startID, char goalID){
 }
 
 void get_pathCoordenades(platform node[]){
-    posesID aux;
     for (size_t j = 1; j < path.size(); j++){
         pathCoordenades.push_back(node[path[j-1]-65].get_outPose(path[j]));
         pathCoordenades.push_back(node[path[j]-65].get_outPose(path[j-1]));
