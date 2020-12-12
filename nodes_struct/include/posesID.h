@@ -2,7 +2,7 @@
 #define POSESID_H
 
 struct posesID{
-    float pose[3];
+    float pose[6];
 };
 
 #endif

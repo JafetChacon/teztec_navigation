@@ -13,7 +13,7 @@ char platform::get_ID(){
 }
 void platform::set_parentID(char _parentID){
     parentID = _parentID;
-    outPose.insert(pair<char,posesID>(_parentID,{0.0,0.0,0.0}));
+    outPose.insert(pair<char,posesID>(_parentID,{0.0,0.0,0.0,0.0,0.0,0.0}));
 }
 char platform::get_parentID(){
     return parentID;
@@ -24,7 +24,7 @@ void platform::set_childrenID(string argv){
     strcpy(childIDpointer, argv.c_str());
     for (size_t i = 0; i < Nchild; i++){
         childID.push_back(childIDpointer[i]);
-        outPose.insert(pair<char,posesID>(childIDpointer[i],{0.0,0.0,0.0}));
+        outPose.insert(pair<char,posesID>(childIDpointer[i],{0.0,0.0,0.0,0.0,0.0,0.0}));
     }
 }
 int platform::get_childrenNum(){
@@ -43,7 +43,7 @@ posesID platform::get_outPose(char _ID){
     if (count(childID.begin(),childID.end(),_ID) || _ID==parentID){
         return outPose[_ID];
     }
-    else return {0.0,0.0,0.0};
+    else return {0.0,0.0,0.0,0.0,0.0,0.0};
 }
 posesID platform::get_parentPose(){
     return outPose[parentID];
