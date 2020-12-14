@@ -1,29 +1,33 @@
-#ifndef PLATFORM_H
-#define PLATFORM_H
+#ifndef TREE_H
+#define TREE_H
 
-#include <iostream>
 #include <map>
 #include <vector>
-#include "../include/posesID.h"
+#include "../include/posesID.h"     //Estructura para guardar las poses de cada ID
+#include "../include/node.h"        //Estructura para guardar los datos de cada nodo
 using namespace std;
 
 class tree{
     private:
         int nodesNum;
-        
+        node *nodes;
     public:
         tree(){
             
         }
-        tree(char nodes[]){
+        tree(char _nodes[]){
             nodesNum = 0;
-            int i = 0;
-            while (nodes[i] != '\0'){
+            while (_nodes[nodesNum] != '\0'){
                 nodesNum++;
-                i++;
             }
+            nodes = new node[nodesNum];
+            for (size_t i = 0; i < nodesNum; i++){
+                nodes[i].ID = _nodes[i];
+            }
+            
         }
         int get_nodesNum();
+        void get_nodesID(char *&);
         ~tree(){}
 };
 
