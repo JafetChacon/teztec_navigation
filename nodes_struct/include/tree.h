@@ -2,7 +2,6 @@
 #define TREE_H
 
 #include <map>
-#include <vector>
 #include "../include/posesID.h"     //Estructura para guardar las poses de cada ID
 #include "../include/node.h"        //Estructura para guardar los datos de cada nodo
 using namespace std;
@@ -11,6 +10,7 @@ class tree{
     private:
         int nodesNum;
         node *nodes;
+        char rootID;
     public:
         tree(){
             
@@ -28,6 +28,8 @@ class tree{
         }
         int get_nodesNum();
         void get_nodesID(char *&);
+        void set_nodeParentID(char,char);
+        void set_rootID(char);
         ~tree(){}
 };
 
